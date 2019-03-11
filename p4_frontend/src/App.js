@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { Route, Link } from "react-router-dom"
 import './App.css';
-import Map from './Map'
+
+import Home from './Home'
+import Show from './Show'
+
 
 class App extends Component {
+
   render() {
     return (
       <div>
@@ -12,7 +16,7 @@ class App extends Component {
           <Link to=""></Link>
         </nav>
         <main>
-          <Route path="/" component={Map}/>
+          <Route path="/" component={Home}/>
           <Route path="/:id" component={Show} />
         </main>
       </div>
