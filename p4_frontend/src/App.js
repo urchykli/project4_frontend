@@ -12,8 +12,8 @@ class App extends Component {
     return (
       <div>
         <nav>
-          <Link to=""></Link>
-          <Link to=""></Link>
+          <Link to="/">Home</Link>
+          {/* <Link to=""></Link> */}
         </nav>
         <main>
           <Route path="/" component={Home}/>
