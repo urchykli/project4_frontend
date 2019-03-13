@@ -47,7 +47,18 @@ class Map extends Component {
           // Optionally call `setState` and use the state to update the map.
         }} 
       >
-        {/* {...breweries} */}
+		{/* {...breweries} */}
+		<Marker
+                latitude={31.954862}
+                longitude={-70.365569}
+                offsetLeft={-20}
+                offsetTop={-10}
+            >
+                {/* <Link to={brewery.id}> */}
+                    <img src={icon} width="15" height="50" />
+                {/* </Link> */}
+                
+            </Marker>
       </ReactMapGL>
       // <MapGL
       // 	{...viewport}

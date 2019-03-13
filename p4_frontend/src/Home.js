@@ -5,17 +5,18 @@ import { Link } from "react-router-dom";
 import ReactMapGL, { Marker, Popup, NavigationControl } from "react-map-gl";
 import icon from "./location.svg";
 
+
 class Home extends Component {
     constructor() {
         super();
-
+        this.markers = null
         this.state = {
             city: null,
             state: null,
             breweries: [],
-            marker: {
-                latitude: null,
-                longitude: null
+            markers: {
+                latitude: [],
+                longitude: []
             },
             realBrewery: [],
             name: false
@@ -52,20 +53,7 @@ class Home extends Component {
 
     }
 
-    // componentDidMount() {
-    // const zip = this.props.match.params.postalCode;
-    // const hardCity = 'Alexandria';
-    // const hardState = 'virginia'
 
-    // const latLong = `https://api.mapbox.com/geocoding/v5/mapbox.places/${zip}.json?access_token=pk.eyJ1IjoibWF0dGZpY2tlIiwiYSI6ImNqNnM2YmFoNzAwcTMzM214NTB1NHdwbnoifQ.Or19S7KmYPHW8YjRz82v6g&cachebuster=1552333204825&autocomplete=true&types=postcode`
-    // axios.get(latLong)
-    // .then(res => {
-    // })
-    // .then()
-    // .catch(err => {
-    // 	console.error(err)
-    // })
-    // }
 componentDidUpdate() {
     this.state.realBrewery = []
     if(!this.state.name) {
@@ -76,26 +64,40 @@ componentDidUpdate() {
         }
         console.log(this.state.realBrewery);
     }
+    this.markers = this.state.realBrewery.map(brewery => {
+        return (
+            <Marker
+                latitude={Number(brewery.latitude)}
+                longitude={Number(brewery.longitude)}
+                offsetLeft={-20}
+                offsetTop={-10}
+            >
+                {/* <Link to={brewery.id}> */}
+                    <img src={icon} width="15" height="50" />
+                {/* </Link> */}
+                
+            </Marker>
+            // var coordinates = [Number(brewery.latitude), Number(brewery.longitude)]
+            // new ReactMapGL.Marker(document.createElement('div'))
+            // .setLngLat(coordinates)
+            // .addTo(map);
+        );
+    });
     }
 }
+// renderCityMarker = this.state.realBrewery.map((brewery, index) => {
+//     return (
+//       <Marker 
+//         key={`marker-${index}`}
+//         longitude={Number(brewery.longitude)}
+//         latitude={Number(brewery.latitude)} offsetLeft={-20} offsetTop={-10}>
+//         <img src={icon} width="15" height="50" />
+//       </Marker>
+//     );
+//   }
+// )
 
     render() {
-        let markers = this.state.realBrewery.map(brewery => {
-            if (brewery.latitude != null) {
-            return (
-                <Marker
-                    latitude={brewery.latitude}
-                    longitude={brewery.longitude}
-                    offsetLeft={-20}
-                    offsetTop={-10}
-                >
-                    <Link to={brewery._id}>
-                        <img src={icon} width="15" height="50" />
-                    </Link>
-                </Marker>
-            );
-            }
-        });
         return (
             <div className="search">
                 <form
@@ -113,8 +115,8 @@ componentDidUpdate() {
                     </p>
                     <input type="submit" value="Submit" />
                 </form>
-                <Map {...markers}/>
-                
+                <Map />
+                {/* { this.state.realBrewery.map(this._renderCityMarker) } */}
             </div>
         );
     }
