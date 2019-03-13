@@ -1,43 +1,46 @@
 import React, { Component } from 'react';
 import { Route, Link } from "react-router-dom"
 import './App.css';
+import axios from "axios";
 
 import Home from './Home'
 import Show from './Show'
 
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
         city: null,
-        state: null,
+        state: '',
         breweries: [],
         marker: {
-            latitude: null,
-            longitude: null
+            latitude: '',
+            longitude: ''
         },
         realBrewery: [],
         name: false,
-        brewery: null
+        brewery: ''
     };
-    this.setBrewery = this.setBrewery.bind(this)
+	this.setBrewery = this.setBrewery.bind(this)
+	this.handleCityInput = this.handleCityInput.bind(this)
+	this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
+	this.handleStateInput = this.handleStateInput.bind(this)
 }
 
-handleCityInput(e) {
+handleCityInput(city) {
     this.setState({
-        city: e.target.value
+        city: city
     });
 }
 
-handleStateInput(e) {
+handleStateInput(state) {
     this.setState({
-        state: e.target.value
+        state: state
     });
 }
 handleSearchSubmit(e) {
-    e.preventDefault();
     const url = `https://api.openbrewerydb.org/breweries?by_city=${
         this.state.city
     }&by_state=${this.state.state}`;
@@ -52,15 +55,14 @@ handleSearchSubmit(e) {
         .catch(err => {
             console.log(err);
         });
-		this.state.realBrewery = []
+		// this.state.realBrewery = []
 		if(!this.state.name) {
 		for (let i = 0; i < this.state.breweries.length; i++) {
 			if (this.state.breweries[i].longitude !== null) {
 				this.setState({
-					realBrewery: realBrewery.push(this.state.breweries[i]
+					realBrewery: this.state.breweries[i]
 				})
-					this.state.realBrewery.push(this.state.breweries[i])
-					this.state.name = true
+				this.state.name = true
 			}
 			console.log(this.state.realBrewery);
 		}
@@ -78,10 +80,14 @@ setBrewery(brewery) {
           {/* <Link to=""></Link> */}
         </nav>
         <main>
-          <Route path="/" component={Home}/>
-          <Route path="/:id" component={Show} />
+          {/* <Route path="/" component={Home}/> */}
+          {/* <Route path="/:id" component={Show} /> */}
         </main>
-          <Route path="/" render={(routerProps) => <Home {...routerProps} {...this.state}/>} />
+          <Route path="/" render={(routerProps) => <Home city={this.state.city}
+          state={this.state.state}
+          onCityInput={this.handleCityInput}
+		  onStateInput={this.handleStateInput}
+		  onSearchSubmit={this.handleSearchSubmit}{...routerProps} {...this.state}/>} />
           <Route path="/:id" render={(routerProps) => <Show setBrewery={this.setBrewery} {...routerProps} {...this.state} />} />
       </div>
     )

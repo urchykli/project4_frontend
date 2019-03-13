@@ -6,50 +6,37 @@ import ReactMapGL, { Marker, Popup, NavigationControl } from "react-map-gl";
 import icon from "./location.svg";
 
 class Home extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
-        this.state = {
-            city: null,
-            state: null,
-            breweries: [],
-            marker: {
-                latitude: null,
-                longitude: null
-            },
-            realBrewery: [],
-            name: false
-        };
+    //     this.state = {
+    //         city: null,
+    //         state: null,
+    //         breweries: [],
+    //         marker: {
+    //             latitude: null,
+    //             longitude: null
+    //         },
+    //         realBrewery: [],
+    //         name: false
+    //     };
+    this.handleCityInput = this.handleCityInput.bind(this)
+    this.handleStateInput = this.handleStateInput.bind(this)
+    this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
     }
 
     handleCityInput(e) {
-        this.setState({
-            city: e.target.value
-        });
+        this.props.onCityInput(e.target.value);
     }
 
     handleStateInput(e) {
-        this.setState({
-            state: e.target.value
-        });
+        this.props.onStateInput(e.target.value);
     }
     handleSearchSubmit(e) {
         e.preventDefault();
-        const url = `https://api.openbrewerydb.org/breweries?by_city=${
-            this.state.city
-        }&by_state=${this.state.state}`;
-        console.log(url);
-        axios
-            .get(url)
-            .then(res => {
-                this.setState({
-                    breweries: res.data
-                });
-            })
-            .catch(err => {
-                console.log(err);
-            });
-
+        this.props.onSearchSubmit(e.target.value);
+        console.log(this.props.city)
+        console.log(this.props.state)
     }
 
     // componentDidMount() {
@@ -66,36 +53,36 @@ class Home extends Component {
     // 	console.error(err)
     // })
     // }
-componentDidUpdate() {
-    this.state.realBrewery = []
-    if(!this.state.name) {
-    for (let i = 0; i < this.state.breweries.length; i++) {
-        if (this.state.breweries[i].longitude !== null) {
-                this.state.realBrewery.push(this.state.breweries[i])
-                this.state.name = true
-        }
-        console.log(this.state.realBrewery);
-    }
-    }
-}
+// componentDidUpdate() {
+//     this.state.realBrewery = []
+//     if(!this.state.name) {
+//     for (let i = 0; i < this.state.breweries.length; i++) {
+//         if (this.state.breweries[i].longitude !== null) {
+//                 this.state.realBrewery.push(this.state.breweries[i])
+//                 this.state.name = true
+//         }
+//         console.log(this.state.realBrewery);
+//     }
+//     }
+// }
 
     render() {
-        let markers = this.state.realBrewery.map(brewery => {
-            if (brewery.latitude != null) {
-            return (
-                <Marker
-                    latitude={brewery.latitude}
-                    longitude={brewery.longitude}
-                    offsetLeft={-20}
-                    offsetTop={-10}
-                >
-                    <Link to={brewery._id}>
-                        <img src={icon} width="15" height="50" />
-                    </Link>
-                </Marker>
-            );
-            }
-        });
+        // let markers = this.props.realBrewery.map(brewery => {
+        //     if (brewery.latitude != null) {
+        //     return (
+        //         <Marker
+        //             latitude={brewery.latitude}
+        //             longitude={brewery.longitude}
+        //             offsetLeft={-20}
+        //             offsetTop={-10}
+        //         >
+        //             <Link to={brewery._id}>
+        //                 <img src={icon} width="15" height="50" />
+        //             </Link>
+        //         </Marker>
+        //     );
+        //     }
+        // });
         return (
             <div className="search">
                 <form
@@ -105,15 +92,17 @@ componentDidUpdate() {
                     <h3>Enter a city and state to find breweries near you!</h3>
                     <p>
                         <label>City: </label>
-                        <textarea onChange={e => this.handleCityInput(e)} />
+                        <input type="text" placeholder="City..." value={this.props.city} onChange={this.handleCityInput} />
+                        {/* <textarea onChange={e => this.handleCityInput(e)} /> */}
                     </p>
                     <p>
                         <label>State: </label>
-                        <textarea onChange={e => this.handleStateInput(e)} />
+                        <input type="text" placeholder="State..." value={this.props.state} onChange={this.handleStateInput} />
+                        {/* <textarea onChange={e => this.handleStateInput(e)} /> */}
                     </p>
                     <input type="submit" value="Submit" />
                 </form>
-                <Map {...markers}/>
+                <Map />
                 
             </div>
         );
