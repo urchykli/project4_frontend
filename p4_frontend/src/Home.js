@@ -37,6 +37,7 @@ class Home extends Component {
         this.props.onSearchSubmit(e.target.value);
         console.log(this.props.city)
         console.log(this.props.state)
+        console.log(this.props.realBrewery)
     }
 
     // componentDidMount() {
@@ -102,8 +103,7 @@ class Home extends Component {
                     </p>
                     <input type="submit" value="Submit" />
                 </form>
-                <Map />
-                
+                <Map realBrewery={this.state.realBrewery}/>
             </div>
         );
     }

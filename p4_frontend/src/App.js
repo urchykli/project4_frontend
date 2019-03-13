@@ -5,7 +5,7 @@ import axios from "axios";
 
 import Home from './Home'
 import Show from './Show'
-
+import Map from './Map'
 
 class App extends Component {
   constructor(props) {
@@ -64,9 +64,11 @@ handleSearchSubmit(e) {
 				})
 				this.state.name = true
 			}
-			console.log(this.state.realBrewery);
 		}
-		}
+	}
+}
+componentDidUpdate(){
+console.log(this.state.realBrewery);
 }
 setBrewery(brewery) {
   this.setState({brewery: brewery})
@@ -82,13 +84,13 @@ setBrewery(brewery) {
         <main>
           {/* <Route path="/" component={Home}/> */}
           {/* <Route path="/:id" component={Show} /> */}
-        </main>
-          <Route path="/" render={(routerProps) => <Home city={this.state.city}
+          <Route path="/" exact render={(routerProps) => <Home city={this.state.city}
           state={this.state.state}
           onCityInput={this.handleCityInput}
 		  onStateInput={this.handleStateInput}
 		  onSearchSubmit={this.handleSearchSubmit}{...routerProps} {...this.state}/>} />
-          <Route path="/:id" render={(routerProps) => <Show setBrewery={this.setBrewery} {...routerProps} {...this.state} />} />
+        </main>
+          <Route path="/:id" exact render={(routerProps) => <Show setBrewery={this.setBrewery} {...routerProps} {...this.state} />} />
       </div>
     )
   }
