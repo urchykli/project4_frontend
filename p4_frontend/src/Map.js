@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import ReactMapGL, { Marker, Popup, NavigationControl } from "react-map-gl";
 import icon from "./location.svg";
+import Markers from './Markers'
 
 const TOKEN =
   "pk.eyJ1IjoidXJjaHlrbGkiLCJhIjoiY2p0Mzk3d2c2MGtnNDN5bHNqaDByOTh0cyJ9.w36OVXzFUTpeyqf0vcvjDA";
@@ -26,19 +27,9 @@ class Map extends Component {
         width: 900,
         height: 500
 	  },
-	//   marker: {
-	// 	  latitude: '',
-	// 	  longitude: ''
-	//   }
-    //   marker: {
-    //     latitude: null,
-    //     longitude: null
-	//   },
-	//   breweries: []
     };
   }
-//   Iterate over realBrewery's latitude and longitude 
-// push each lat long combo into an array of arrays
+
 
 //   setMarker(){
 // 	  let latLong = []

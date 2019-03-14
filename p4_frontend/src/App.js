@@ -54,24 +54,25 @@ handleSearchSubmit(e) {
             console.log(err);
         });
 	}
+
 	componentDidUpdate(){
-		if(!this.state.name) {
-		for (let i = 0; i < this.state.breweries.length; i++) {
-			if (this.state.breweries[i].longitude !== null) {
-				this.setState({
-					realBrewery: this.state.realBrewery.push(this.state.breweries[i])
-				})
-				this.setState({
-					latitude: this.state.latitude.push(Number(this.state.breweries[i].latitude))
-				})
-				this.setState({
-					longitude: this.state.longitude.push(Number(this.state.breweries[i].longitude))
-				})
-				this.state.name = true
+			if (!this.state.name) {
+				for (let i = 0; i < this.state.breweries.length; i++) {
+					if (this.state.breweries[i].longitude !== null) {
+						this.setState(prevState => ({
+							realBrewery: [...prevState.realBrewery, this.state.breweries[i]]
+						}));
+						this.setState(prevState => ({
+							latitude: [...prevState.latitude, Number(this.state.breweries[i].latitude)]
+						}));
+						this.setState(prevState => ({
+							longitude: [...prevState.longitude, Number(this.state.breweries[i].longitude)]
+						}));
+						this.state.name = true;
+					}
+				}
 			}
-		}
-	}
-	console.log(this.state.realBrewery)
+			console.log(this.state.realBrewery);
 }
 setBrewery(brewery) {
   this.setState({brewery: brewery})
