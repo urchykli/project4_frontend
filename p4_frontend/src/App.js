@@ -15,8 +15,8 @@ class App extends Component {
         city: null,
         state: '',
         breweries: [],
-		latitude: '',
-		longitude: '',
+		latitude: [],
+		longitude: [],
         realBrewery: [],
         name: false,
         brewery: ''
@@ -59,19 +59,19 @@ handleSearchSubmit(e) {
 		for (let i = 0; i < this.state.breweries.length; i++) {
 			if (this.state.breweries[i].longitude !== null) {
 				this.setState({
-					realBrewery: this.state.breweries[i]
+					realBrewery: this.state.realBrewery.push(this.state.breweries[i])
 				})
 				this.setState({
-					latitude: Number(this.state.breweries[i].latitude)
+					latitude: this.state.latitude.push(Number(this.state.breweries[i].latitude))
 				})
 				this.setState({
-					longitude: Number(this.state.breweries[i].longitude)
+					longitude: this.state.longitude.push(Number(this.state.breweries[i].longitude))
 				})
 				this.state.name = true
 			}
 		}
-		console.log(this.state.realBrewery)
 	}
+	console.log(this.state.realBrewery)
 }
 setBrewery(brewery) {
   this.setState({brewery: brewery})
@@ -97,7 +97,7 @@ setBrewery(brewery) {
         </main>
           <Route path="/:id" exact render={(routerProps) => <Show setBrewery={this.setBrewery} {...routerProps} {...this.state} />} />
       </div>
-    )
+	)
   }
 }
 

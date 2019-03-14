@@ -71,12 +71,16 @@ class Map extends Component {
 // 		  );
 // 	  });
 // }
+componentDidUpdate(){
+	console.log(this.props.realBrewery)
+	console.log(this.props.latitude)
+}
   render() {
-	  console.log(Number(this.props.realBrewery.latitude))
+	  console.log(this.props.realBrewery)
 	  console.log(this.props.latitude)
-	//   let markers = this.props.marker.map((comment, index) => (
+	//   let markers = this.props.realBrewery.map((comment, index) => {
 	// 	<Comment message={comment} key={index}/>
-	//   ))
+	//   })
 	  let markers = Object.values(this.props.realBrewery).map(brewery => {
 		let latitude = Number(brewery[9]);
 		let longitude = Number(brewery[8]);
