@@ -62,25 +62,41 @@ class Map extends Component {
 // 		  );
 // 	  });
 // }
-componentDidUpdate(){
-	console.log(this.props.realBrewery)
-	console.log(this.props.latitude)
-}
+// setMarker(){
+// 	for (let i = 0; i < this.props.latitude.length; i++){
+// 		return (
+// 			<Marker
+// 			latitude={this.props.latitude[i]}
+// 			longitude={this.props.longitude[i]}
+// 			offsetLeft={-20}
+// 			offsetTop={-10}
+// 			>
+// 				  {/* <Link to={brewery._id}> */}
+// 					  <img src={icon} width="15" height="50" />
+// 				  {/* </Link> */}
+// 			  </Marker>
+// 		  );
+// 	}
+
+// }
+
   render() {
 	  console.log(this.props.realBrewery)
 	  console.log(this.props.latitude)
 	//   let markers = this.props.realBrewery.map((comment, index) => {
 	// 	<Comment message={comment} key={index}/>
 	//   })
-	  let markers = Object.values(this.props.realBrewery).map(brewery => {
-		let latitude = Number(brewery[9]);
-		let longitude = Number(brewery[8]);
+
+	  let markers = this.props.realBrewery.map((brewery, index) => {
+		// let latitude = Number(brewery[4]);
+		// let longitude = Number(brewery[5]);
 		return (
 			<Marker
-			latitude={latitude}
-			longitude={longitude}
+			latitude={Number(brewery.latitude)}
+			longitude={Number(brewery.longitude)}
 			offsetLeft={-20}
 			offsetTop={-10}
+			key={index}
 			>
 				  {/* <Link to={brewery._id}> */}
 					  <img src={icon} width="15" height="50" />
@@ -102,7 +118,7 @@ componentDidUpdate(){
           // Optionally call `setState` and use the state to update the map.
         }} 
       >
-	  {/* {this.setMarker} */}
+	  {/* {this.state.realBrewery.map(this.setMarker)} */}
         {this.markers}
       </ReactMapGL>
       // <MapGL
