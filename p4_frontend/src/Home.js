@@ -103,7 +103,7 @@ class Home extends Component {
                     </p>
                     <input type="submit" value="Submit" />
                 </form>
-                <Map realBrewery={this.state.realBrewery}/>
+                {/* <Map realBrewery={this.props.realBrewery}/> */}
             </div>
         );
     }

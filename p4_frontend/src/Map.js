@@ -25,16 +25,76 @@ class Map extends Component {
         pitch: 0,
         width: 900,
         height: 500
-      },
+	  },
+	//   marker: {
+	// 	  latitude: '',
+	// 	  longitude: ''
+	//   }
     //   marker: {
     //     latitude: null,
     //     longitude: null
 	//   },
-	  breweries: []
+	//   breweries: []
     };
   }
+//   Iterate over realBrewery's latitude and longitude 
+// push each lat long combo into an array of arrays
 
+//   setMarker(){
+// 	  let latLong = []
+// 	  let lat = this.props.realBrewery.latitude
+// 	  let long = this.props.realBrewery.longitude
+// 	  Object.entries(this.props.realBrewery).forEach(entry => {
+// 		let key = entry[0];
+// 		let value = entry[1];
+// 		console.log(key, value)
+// 	  })
+// 	//   for (let [key, value] of Object.entries(this.props.realBrewery)){
+// 	// 	  console.log(key, value)
+// 	//   }
+//   }
+// setMarker(){
+// 	Object.values(this.props.realBrewery).map(brewery => {
+// 		let latitude = brewery[9];
+// 		let longitude = brewery[8];
+// 		return (
+// 			<Marker
+// 			latitude={latitude}
+// 			longitude={longitude}
+// 			offsetLeft={-20}
+// 			offsetTop={-10}
+// 			>
+// 				  <Link to={brewery._id}>
+// 					  <img src={icon} width="15" height="50" />
+// 				  </Link>
+// 			  </Marker>
+// 		  );
+// 	  });
+// }
   render() {
+	  console.log(Number(this.props.realBrewery.latitude))
+	  console.log(this.props.latitude)
+	//   let markers = this.props.marker.map((comment, index) => (
+	// 	<Comment message={comment} key={index}/>
+	//   ))
+	  let markers = Object.values(this.props.realBrewery).map(brewery => {
+		let latitude = Number(brewery[9]);
+		let longitude = Number(brewery[8]);
+		return (
+			<Marker
+			latitude={latitude}
+			longitude={longitude}
+			offsetLeft={-20}
+			offsetTop={-10}
+			>
+				  {/* <Link to={brewery._id}> */}
+					  <img src={icon} width="15" height="50" />
+				  {/* </Link> */}
+			  </Marker>
+		  );
+		});
+		console.log(markers)
+
     const { viewport } = this.state;
 
     return (
@@ -47,7 +107,8 @@ class Map extends Component {
           // Optionally call `setState` and use the state to update the map.
         }} 
       >
-        {/* {...breweries} */}
+	  {/* {this.setMarker} */}
+        {this.markers}
       </ReactMapGL>
       // <MapGL
       // 	{...viewport}

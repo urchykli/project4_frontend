@@ -17,14 +17,13 @@ class Show extends Component {
 		})
 	  }
 	render() {
-		let features = this.props.brewery.tag_list.map((feature, index) => {
-			return <li>{feature}</li>
-			// <Comment message={comment} key={index}/>
-		})
+		// let features = this.props.brewery.tag_list.map((feature, index) => {
+		// 	return <li>{feature}</li>
+		// })
 		return (
 			<div>
 				<h1>{this.props.brewery.name}</h1>
-				<ul>{features}</ul>
+				{/* <ul>{features}</ul> */}
 				<h3>{this.props.brewery.street},{this.props.brewery.city}, {this.props.brewery.state}, {this.props.brewery.postal_code} </h3>
 				<h3>{this.props.brewery.phone}</h3>
 

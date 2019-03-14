@@ -15,10 +15,8 @@ class App extends Component {
         city: null,
         state: '',
         breweries: [],
-        marker: {
-            latitude: '',
-            longitude: ''
-        },
+		latitude: '',
+		longitude: '',
         realBrewery: [],
         name: false,
         brewery: ''
@@ -55,20 +53,25 @@ handleSearchSubmit(e) {
         .catch(err => {
             console.log(err);
         });
-		// this.state.realBrewery = []
+	}
+	componentDidUpdate(){
 		if(!this.state.name) {
 		for (let i = 0; i < this.state.breweries.length; i++) {
 			if (this.state.breweries[i].longitude !== null) {
 				this.setState({
 					realBrewery: this.state.breweries[i]
 				})
+				this.setState({
+					latitude: Number(this.state.breweries[i].latitude)
+				})
+				this.setState({
+					longitude: Number(this.state.breweries[i].longitude)
+				})
 				this.state.name = true
 			}
 		}
+		console.log(this.state.realBrewery)
 	}
-}
-componentDidUpdate(){
-console.log(this.state.realBrewery);
 }
 setBrewery(brewery) {
   this.setState({brewery: brewery})
@@ -89,6 +92,8 @@ setBrewery(brewery) {
           onCityInput={this.handleCityInput}
 		  onStateInput={this.handleStateInput}
 		  onSearchSubmit={this.handleSearchSubmit}{...routerProps} {...this.state}/>} />
+		  <Map realBrewery={this.state.realBrewery} latitude={this.state.latitude} longitude={this.state.longitude}/>
+
         </main>
           <Route path="/:id" exact render={(routerProps) => <Show setBrewery={this.setBrewery} {...routerProps} {...this.state} />} />
       </div>
