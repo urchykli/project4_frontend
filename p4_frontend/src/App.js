@@ -76,7 +76,9 @@ handleSearchSubmit(e) {
 }
 setBrewery(brewery) {
   this.setState({brewery: brewery})
+  console.log(this.state.brewery)
 }
+
 
   render() {
     return (
@@ -93,10 +95,10 @@ setBrewery(brewery) {
           onCityInput={this.handleCityInput}
 		  onStateInput={this.handleStateInput}
 		  onSearchSubmit={this.handleSearchSubmit}{...routerProps} {...this.state}/>} />
-		  <Map realBrewery={this.state.realBrewery} latitude={this.state.latitude} longitude={this.state.longitude}/>
+		  <Map realBrewery={this.state.realBrewery} latitude={this.state.latitude} longitude={this.state.longitude} setBrewery={this.setBrewery}/>
 
         </main>
-          <Route path="/:id" exact render={(routerProps) => <Show setBrewery={this.setBrewery} {...routerProps} {...this.state} />} />
+          <Route path="/:id" exact render={(routerProps) => <Show brewery={this.brewery} {...routerProps} {...this.state} />} />
       </div>
 	)
   }
