@@ -86,11 +86,8 @@ setBrewery(brewery) {
       <div>
         <nav>
           <Link to="/">Home</Link>
-          {/* <Link to=""></Link> */}
         </nav>
         <main>
-          {/* <Route path="/" component={Home}/> */}
-          {/* <Route path="/:id" component={Show} /> */}
           <Route path="/" exact render={(routerProps) => <Home city={this.state.city}
           state={this.state.state}
           onCityInput={this.handleCityInput}

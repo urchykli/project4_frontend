@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// import "./Map.css";
-import axios from "axios";
+import "./Map.css";
+// import axios from "axios";
 import ReactMapGL, { Marker, Popup, NavigationControl } from "react-map-gl";
-import icon from "./location.svg";
-import Markers from "./Markers";
-import Show from "./Show";
+import icon from "./beer_icon.png";
+// import Show from "./Show";
+
 
 const TOKEN =
     "pk.eyJ1IjoidXJjaHlrbGkiLCJhIjoiY2p0Mzk3d2c2MGtnNDN5bHNqaDByOTh0cyJ9.w36OVXzFUTpeyqf0vcvjDA";
@@ -95,10 +95,10 @@ class Map extends Component {
                     key={`marker-${index}`}
                 >
                     {/* <Link to={brewery._id}> */}
-                    <img
+                    <img className='marker'
                         src={icon}
-                        width="15"
-                        height="50"
+                        width="20"
+                        height="27"
                         onClick={() =>
                             this.setState(prevState => ({
                                 popupInfo: [...prevState.popupInfo, brewery]
