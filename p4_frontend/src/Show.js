@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 
-const url = 'https://api.openbrewerydb.org/breweries/5494'
+const breweryURL = 'https://api.openbrewerydb.org/breweries/'
 class Show extends Component {
-	componentDidMount() {
-		// const currency = this.props.match.params.scorpion;
-		// const url = `${coindeskURL}${currency}.json`
 	
+	componentDidMount() {
+		const breweryId = this.props.match.params.id;
+		const url = `${breweryURL}${breweryId}`
+	console.log(breweryId)
 		axios.get(url)
 		.then(res => {
 		  let newBrewery = res.data;
@@ -15,11 +16,13 @@ class Show extends Component {
 		.catch(err => {
 		  console.error(err)
 		})
+		// console.log(newBrewery)
 	  }
 	render() {
 		// let features = this.props.brewery.tag_list.map((feature, index) => {
 		// 	return <li>{feature}</li>
 		// })
+		// console.log(this.props.brewery.name)
 		return (
 			<div>
 				<h1>{this.props.brewery.name}</h1>

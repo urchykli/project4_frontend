@@ -27,8 +27,8 @@ class Map extends Component {
                 pitch: 0,
                 width: 900,
                 height: 500
-			},
-			popupInfo: []
+            },
+            popupInfo: []
         };
     }
 
@@ -79,29 +79,12 @@ class Map extends Component {
     // 		  );
     // 	}
 
-	// }
-componentDidUpdate() {
-		// const {popupInfo} = this.state;
-	
-		return this.state.popupInfo && (
-		  <Popup tipSize={5}
-			anchor="top"
-			longitude={this.state.popupInfo.longitude}
-			latitude={this.state.popupInfo.latitude}
-			closeOnClick={false}
-			onClose={() => this.setState({popupInfo: null})} >
-			<div>{this.state.popupInfo.name}</div>
-			{/* <CityInfo info={popupInfo} /> */}
-		  </Popup>
-		);
-	  }
-
+    // }
+// from https://github.com/uber/react-map-gl/blob/4.0-release/examples/controls/src/app.js
     _updateViewport = viewport => {
         this.setState({ viewport });
     };
     render() {
-
-
         let markers = this.props.realBrewery.map((brewery, index) => {
             return (
                 <Marker
@@ -112,25 +95,39 @@ componentDidUpdate() {
                     key={`marker-${index}`}
                 >
                     {/* <Link to={brewery._id}> */}
-                        <img src={icon} width="15" height="50" onClick={() => this.setState(prevState => ({popupInfo: [...prevState.popupInfo, brewery]}))}
-						/>
+                    <img
+                        src={icon}
+                        width="15"
+                        height="50"
+                        onClick={() =>
+                            this.setState(prevState => ({
+                                popupInfo: [...prevState.popupInfo, brewery]
+                            }))
+                        }
+                    />
                     {/* </Link> */}
                 </Marker>
             );
-		});
-		let pop = this.state.popupInfo.map((info, index) => {
-		return info && (
-			<Popup tipSize={5}
-			  anchor="top"
-			  longitude={Number(info.longitude)}
-			  latitude={Number(info.latitude)}
-			  closeOnClick={false}
-			  onClose={() => this.setState({popupInfo: []})} >
-			  <div>{info.name}</div>
-			  {/* <CityInfo info={popupInfo} /> */}
-			</Popup>
-		  );
-		})
+        });
+        let pop = this.state.popupInfo.map((info, index) => {
+            return (
+                info && (
+                    <Popup
+                        tipSize={5}
+                        anchor="top"
+                        longitude={Number(info.longitude)}
+                        latitude={Number(info.latitude)}
+                        closeOnClick={false}
+                        onClose={() => this.setState({ popupInfo: [] })}
+                    >
+                        <div>
+						<Link to={"/"+ info.id} onClick={() => this.setBrewery({brewery: info})}>{info.name}</Link>
+						</div>
+                        {/* <CityInfo info={popupInfo} /> */}
+                    </Popup>
+                )
+            );
+        });
         // console.log(id)
         console.log(this.props.brewery);
         console.log(this.state.popupInfo);
@@ -150,8 +147,8 @@ componentDidUpdate() {
                         onViewportChange={this._updateViewport}
                     />
                 </div>
-				{markers}
-				{pop}
+                {markers}
+                {pop}
             </ReactMapGL>
         );
     }
