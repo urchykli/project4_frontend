@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import './Home.css'
+import Map from './Map'
 
 
 class Home extends Component {
@@ -46,17 +47,17 @@ class Home extends Component {
                     className="search-form"
                     onSubmit={e => this.handleSearchSubmit(e)}
                 >
-                    <h3>Enter a city and state to find breweries near you!</h3>
+                    <h3 className='welcome'>Enter a city and state to find breweries near you!</h3>
                     <p>
                         <label>City: </label>
                         <input type="text" placeholder="City..." value={this.props.city} onChange={this.handleCityInput} />
-                    </p>
-                    <p>
                         <label>State: </label>
                         <input type="text" placeholder="State..." value={this.props.state} onChange={this.handleStateInput} />
-                    </p>
                     <input type="submit" value="Submit" />
+                    </p>
                 </form>
+                <Map realBrewery={this.props.realBrewery} latitude={this.props.latitude} longitude={this.props.longitude} />
+
             </div>
         );
     }

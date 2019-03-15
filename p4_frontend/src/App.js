@@ -85,7 +85,7 @@ setBrewery(brewery) {
     return (
       <div>
         <nav>
-          <Link to="/">Home</Link>
+          <Link to="/" className='header'>Home</Link>
         </nav>
         <main>
           <Route path="/" exact render={(routerProps) => <Home city={this.state.city}
@@ -93,7 +93,7 @@ setBrewery(brewery) {
           onCityInput={this.handleCityInput}
 		  onStateInput={this.handleStateInput}
 		  onSearchSubmit={this.handleSearchSubmit}{...routerProps} {...this.state}/>} />
-		  <Map realBrewery={this.state.realBrewery} latitude={this.state.latitude} longitude={this.state.longitude} />
+		  {/* <Map realBrewery={this.state.realBrewery} latitude={this.state.latitude} longitude={this.state.longitude} /> */}
 
         </main>
           <Route path="/:id" exact render={(routerProps) => <Show {...routerProps} {...this.state} setBrewery={this.setBrewery} />} />

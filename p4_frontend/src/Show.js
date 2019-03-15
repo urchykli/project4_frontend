@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-
+import './Show.css'
 
 const breweryURL = 'https://api.openbrewerydb.org/breweries/'
 class Show extends Component {
@@ -20,13 +20,16 @@ class Show extends Component {
 	  }
 	render() {
 		return (
-			<div>
+			<div className='brewery-info brewPage'>
+			<div className='container'>
 				<h1>{this.props.brewery.name}</h1>
-				<h3>{this.props.brewery.phone}</h3>
-				<h3><a href={this.props.brewery.website_url}>{this.props.brewery.website_url}</a></h3>
+				<h3>p. {this.props.brewery.phone}</h3>
+				<h3>check it: <a href={this.props.brewery.website_url}>{this.props.brewery.website_url}</a></h3>
 				{/* <ul>{features}</ul> */}
-				<h3>{this.props.brewery.street},{this.props.brewery.city}, {this.props.brewery.state}, {this.props.brewery.postal_code} </h3>
-
+				<h3> don't drink and drive... </h3>
+				<h3> {this.props.brewery.street}</h3>
+				<h3> {this.props.brewery.city}, {this.props.brewery.state}, {this.props.brewery.postal_code} </h3>
+				</div>
 			</div>
 		);
 	}

@@ -13,7 +13,7 @@ const navStyle = {
     position: "absolute",
     top: 0,
     left: 0,
-    padding: "10px"
+	padding: "10px",
 };
 class Map extends Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class Map extends Component {
                 zoom: 3.5,
                 bearing: 0,
                 pitch: 0,
-                width: 900,
+                width: '100vw',
                 height: 500
             },
             popupInfo: []
@@ -121,7 +121,7 @@ class Map extends Component {
                         onClose={() => this.setState({ popupInfo: [] })}
                     >
                         <div>
-						<Link to={"/"+ info.id} onClick={() => this.setBrewery({brewery: info})}>{info.name}</Link>
+						<Link className="popup"to={"/"+ info.id} onClick={() => this.setBrewery({brewery: info})}>{info.name}</Link>
 						</div>
                         {/* <CityInfo info={popupInfo} /> */}
                     </Popup>
@@ -137,6 +137,7 @@ class Map extends Component {
 
         return (
             <ReactMapGL
+			className='map'
                 {...viewport}
                 mapboxApiAccessToken={TOKEN}
                 mapStyle="mapbox://styles/urchykli/cjt4cqf1x1kpt1frx7xj7g3yq"
