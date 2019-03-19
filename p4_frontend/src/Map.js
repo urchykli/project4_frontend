@@ -32,54 +32,6 @@ class Map extends Component {
         };
     }
 
-    //   setMarker(){
-    // 	  let latLong = []
-    // 	  let lat = this.props.realBrewery.latitude
-    // 	  let long = this.props.realBrewery.longitude
-    // 	  Object.entries(this.props.realBrewery).forEach(entry => {
-    // 		let key = entry[0];
-    // 		let value = entry[1];
-    // 		console.log(key, value)
-    // 	  })
-    // 	//   for (let [key, value] of Object.entries(this.props.realBrewery)){
-    // 	// 	  console.log(key, value)
-    // 	//   }
-    //   }
-    // setMarker(){
-    // 	Object.values(this.props.realBrewery).map(brewery => {
-    // 		let latitude = brewery[9];
-    // 		let longitude = brewery[8];
-    // 		return (
-    // 			<Marker
-    // 			latitude={latitude}
-    // 			longitude={longitude}
-    // 			offsetLeft={-20}
-    // 			offsetTop={-10}
-    // 			>
-    // 				  <Link to={brewery._id}>
-    // 					  <img src={icon} width="15" height="50" />
-    // 				  </Link>
-    // 			  </Marker>
-    // 		  );
-    // 	  });
-    // }
-    // setMarker(){
-    // 	for (let i = 0; i < this.props.latitude.length; i++){
-    // 		return (
-    // 			<Marker
-    // 			latitude={this.props.latitude[i]}
-    // 			longitude={this.props.longitude[i]}
-    // 			offsetLeft={-20}
-    // 			offsetTop={-10}
-    // 			>
-    // 				  {/* <Link to={brewery._id}> */}
-    // 					  <img src={icon} width="15" height="50" />
-    // 				  {/* </Link> */}
-    // 			  </Marker>
-    // 		  );
-    // 	}
-
-    // }
 // from https://github.com/uber/react-map-gl/blob/4.0-release/examples/controls/src/app.js
     _updateViewport = viewport => {
         this.setState({ viewport });
@@ -94,7 +46,6 @@ class Map extends Component {
                     offsetTop={-10}
                     key={`marker-${index}`}
                 >
-                    {/* <Link to={brewery._id}> */}
                     <img className='marker'
                         src={icon}
                         width="20"
@@ -105,7 +56,6 @@ class Map extends Component {
                             }))
                         }
                     />
-                    {/* </Link> */}
                 </Marker>
             );
         });
