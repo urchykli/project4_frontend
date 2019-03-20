@@ -7,7 +7,6 @@ For my fourth project, I created a web app fully in React that combines the Open
 ## Features
 
 - Created fully in React
-<br>
 - Combines two APIs
 <br>
 
